@@ -1,0 +1,410 @@
+@charset "utf-8";
+/* ==========================================================================
+   1. CSS Reset Code
+   ========================================================================== */
+
+/* 1.1. Eric Meyers Reset
+   http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+   ========================================================================== */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img,
+ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody,
+tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure,
+figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+/* Force scrollbar */
+html { overflow-y: scroll; }
+
+/* Align radios and text inputs with their label */
+
+input[type='radio'] { vertical-align: text-bottom; }
+
+/* Hand cursor on clickable input elements */
+label,
+input[type='button'],
+input[type='submit'],
+button {
+  cursor: pointer;
+}
+
+strong {
+  font-weight: bold;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+em { font-style: italic; }
+
+img {
+  width: 100%;
+  border: 0;
+  vertical-align: middle;
+}
+
+sub,
+sup {
+  vertical-align: baseline;
+  position: relative;
+  font-size: 55%;
+  line-height: 0;
+}
+
+sup { top: -.7em; }
+sub { bottom: -.25em; }
+
+/* 1.2. Clear Fix
+   ========================== */
+
+.cf:before,
+.cf:after {
+  display: table;
+  content: " ";
+}
+
+.cf:after { clear: both; }
+.cf { *zoom: 1; }
+
+/*for all*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --clr-black: #000;
+  --clr-white: #fff;
+  --clr-red: #da5749;
+  --clr-grey: #666;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+a { 
+  display: inline-block;
+  text-decoration: none; 
+}
+
+li {
+  display: inline-block;
+  list-style-type: none;
+}
+
+span {
+  display: inline-block;
+}
+
+::first-letter {
+  text-transform: uppercase;
+}
+
+/*for wrapper*/
+.wrapper {
+  max-width: 1360px;
+  width: 86%; 
+  margin: 0 auto;
+}
+
+/*=================================
+  main styling starts here
+=================================*/ 
+
+.container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  transition: all .3s;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 100px 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.mode-button {
+  width: 100px;
+  padding: 8px 10px;
+  border-radius: 5px;
+  background-color: var(--clr-black);
+  color: var(--clr-white);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  transition: background-color .3s;
+}
+
+/* analog clock styling starts */
+
+.analog-clock {
+  width: 200px;
+  height: 200px;
+  padding: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 2px 2px 4px var(--clr-white),
+  inset -2px -2px 4px var(--clr-black);
+}
+
+.analog-points {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+}
+
+.analog-clock .analog-points span[class^='analog'] {
+  width: 3px;
+  border-radius: 50% 50% 0 0;
+  position: absolute;
+  text-indent: -99999px;
+}
+
+.analog-hours {
+  height: 40%;
+  background: linear-gradient(to top, transparent 50%, var(--clr-black) 50%);
+}
+
+.analog-minutes {
+  height: 58%;
+  background: linear-gradient(to top, transparent 50%, var(--clr-black) 50%);
+}
+
+.analog-seconds {
+  height: 58%;
+  background: linear-gradient(to top, transparent 50%, var(--clr-red) 50%);
+}
+
+.analog-seconds::before,
+.analog-seconds::after {
+  content: '';
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.analog-seconds::before {
+  width: 8px;
+  height: 8px;
+  background-color: var(--clr-red);
+}
+
+.analog-seconds::after {
+  width: 4px;
+  height: 4px;
+  background-color: var(--clr-black);
+}
+
+/* analog clock styling ends */
+
+/* digital clock styling starts */
+
+.digital-clock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  text-transform: uppercase
+}
+
+.digital-hours-minutes,
+.digital-am-pm {
+  color: var(--clr-black);
+  font-size: 40px;
+}
+
+.digital-bottom span {
+  color: var(--clr-grey);
+  font-size: 12px;
+}
+
+.digital-date {
+  padding: 1px 2px;
+  border-radius: 50%;
+  background-color: var(--clr-black);
+}
+
+/* digital clock styling ends */
+
+/* new added html analog-number start */
+
+.analog-number {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+}
+
+.number {
+  position: absolute;
+  color: var(--clr-white);
+  font-weight: 500;
+}
+
+.number:nth-child(1) {
+  top: 6%;
+  left: 73%;
+  transform: translatex(-50%);
+}
+
+.number:nth-child(2) {
+  top: 27%;
+  right: 6%;
+  transform: translatey(-50%);
+}
+
+.number:nth-child(3) {
+  top: 50%;
+  right: 0;
+  transform: translatey(-50%);
+}
+
+.number:nth-child(4) {
+  top: 73%;
+  right: 6%;
+  transform: translatey(-50%);
+}
+
+.number:nth-child(5) {
+  bottom: 6%;
+  left: 73%;
+  transform: translatex(-50%);
+}
+
+.number:nth-child(6) {
+  bottom: 0;
+  left: 50%;
+  transform: translatex(-50%);
+}
+
+.number:nth-child(7) {
+  bottom: 6%;
+  left: 27%;
+  transform: translatex(-50%);
+}
+
+.number:nth-child(8) {
+  top: 73%;
+  left: 6%;
+  transform: translatey(-50%);
+}
+
+.number:nth-child(9) {
+  top: 50%;
+  left: 0;
+  transform: translatey(-50%);
+}
+
+.number:nth-child(10) {
+  top: 27%;
+  left: 6%;
+  transform: translatey(-50%);
+}
+
+.number:nth-child(11) {
+  top: 6%;
+  left: 27%;
+  transform: translatex(-50%);
+}
+
+.number:nth-child(12) {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+/* new added html analog-number end */
+
+/* new added html analog-seconds-block start */
+
+.analog-second-block {
+  width: 69%;
+  height: 69%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.second-block {
+  width: 2px;
+  height: 100%;
+  position: absolute;
+  background: linear-gradient(to top, transparent 95%, var(--clr-grey) 5%);
+  text-indent: -99999px;
+}
+
+.second-block:nth-child(5n + 1) {
+  background: linear-gradient(to top, transparent 93%, var(--clr-red) 7%);
+}
+
+/* new added html analog-seconds-block end */
+
+/* extra classes for js program */
+
+.display-none {
+  display: none;
+}
+
+.background-white {
+  background-color: var(--clr-white);
+  color: var(--clr-black);
+}
+
+.background-black {
+  background-color: var(--clr-black);
+}
+
+.color {
+  color: var(--clr-white);
+}
+
+.linear-background {
+  background: linear-gradient(to top, transparent 50%, var(--clr-white) 50%);
+}
+
+ /*=================================
+  main styling ends here
+=================================*/ 
